@@ -1,11 +1,11 @@
 import type { BookingStatus } from '@/lib/supabase/types';
 
 const STYLES: Record<BookingStatus, string> = {
-  pending: 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300',
-  confirmed: 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300',
-  rejected: 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300',
-  cancelled: 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400',
-  completed: 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300',
+  pending: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:ring-amber-800',
+  confirmed: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:ring-emerald-800',
+  rejected: 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:ring-rose-800',
+  cancelled: 'bg-stone-100 text-stone-600 ring-1 ring-inset ring-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:ring-stone-700',
+  completed: 'bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-200 dark:bg-sky-950/40 dark:text-sky-300 dark:ring-sky-800',
 };
 
 export default function StatusBadge({ status }: { status: BookingStatus }) {

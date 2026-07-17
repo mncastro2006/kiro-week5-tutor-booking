@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import { CalendarBlankIcon, WarningCircleIcon, TrayIcon } from '@phosphor-icons/react/ssr';
 import { createClient } from '@/lib/supabase/server';
 import { getCurrentUser } from '@/lib/auth';
 import StatusBadge from '@/components/StatusBadge';
@@ -60,38 +61,42 @@ export default async function TutorDashboardPage() {
 
   return (
     <div className="mx-auto w-full max-w-4xl flex-1 px-6 py-12">
-      <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">Tutor dashboard</h1>
+      <h1 className="text-2xl font-semibold tracking-tight text-foreground">Tutor dashboard</h1>
 
       {bookingsError && (
-        <p className="mt-6 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+        <p className="mt-6 flex items-start gap-2 rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
+          <WarningCircleIcon size={16} className="mt-0.5 shrink-0" />
           Could not load your sessions: {bookingsError.message}
         </p>
       )}
 
-      <section className="mt-8">
-        <h2 className="text-lg font-medium text-zinc-950 dark:text-zinc-50">Pending requests</h2>
+      <section className="mt-10">
+        <h2 className="text-lg font-medium text-foreground">Pending requests</h2>
         {pending.length === 0 ? (
-          <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">No pending requests.</p>
+          <div className="mt-3 flex flex-col items-center gap-2 rounded-2xl border border-dashed border-stone-300 py-10 text-center dark:border-stone-700">
+            <TrayIcon size={26} className="text-stone-400" />
+            <p className="text-sm text-stone-600 dark:text-stone-400">No pending requests right now.</p>
+          </div>
         ) : (
           <ul className="mt-3 flex flex-col gap-3">
             {pending.map((booking) => (
               <li
                 key={booking.id}
-                className="flex items-start justify-between gap-4 rounded-xl border border-black/[.08] bg-white p-4 dark:border-white/[.145] dark:bg-zinc-950"
+                className="flex items-start justify-between gap-4 rounded-2xl border border-stone-200 bg-background p-4 dark:border-stone-800"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="font-medium text-zinc-950 dark:text-zinc-50">{booking.subject}</p>
+                    <p className="font-medium text-foreground">{booking.subject}</p>
                     <StatusBadge status={booking.status} />
                   </div>
-                  <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
                     from {booking.student?.full_name ?? 'Unknown student'}
                   </p>
-                  <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
                     {formatRange(booking.start_at, booking.end_at)}
                   </p>
                   {booking.notes && (
-                    <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-500">&quot;{booking.notes}&quot;</p>
+                    <p className="mt-2 text-sm text-stone-500">&quot;{booking.notes}&quot;</p>
                   )}
                 </div>
                 <BookingRequestActions bookingId={booking.id} />
@@ -102,25 +107,28 @@ export default async function TutorDashboardPage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-lg font-medium text-zinc-950 dark:text-zinc-50">Confirmed schedule</h2>
+        <h2 className="text-lg font-medium text-foreground">Confirmed schedule</h2>
         {confirmed.length === 0 ? (
-          <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">No confirmed sessions.</p>
+          <div className="mt-3 flex flex-col items-center gap-2 rounded-2xl border border-dashed border-stone-300 py-10 text-center dark:border-stone-700">
+            <CalendarBlankIcon size={26} className="text-stone-400" />
+            <p className="text-sm text-stone-600 dark:text-stone-400">No confirmed sessions yet.</p>
+          </div>
         ) : (
           <ul className="mt-3 flex flex-col gap-3">
             {confirmed.map((booking) => (
               <li
                 key={booking.id}
-                className="flex items-start justify-between gap-4 rounded-xl border border-black/[.08] bg-white p-4 dark:border-white/[.145] dark:bg-zinc-950"
+                className="flex items-start justify-between gap-4 rounded-2xl border border-stone-200 bg-background p-4 dark:border-stone-800"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="font-medium text-zinc-950 dark:text-zinc-50">{booking.subject}</p>
+                    <p className="font-medium text-foreground">{booking.subject}</p>
                     <StatusBadge status={booking.status} />
                   </div>
-                  <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
                     with {booking.student?.full_name ?? 'Unknown student'}
                   </p>
-                  <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
                     {formatRange(booking.start_at, booking.end_at)}
                   </p>
                 </div>
@@ -132,37 +140,37 @@ export default async function TutorDashboardPage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-lg font-medium text-zinc-950 dark:text-zinc-50">Profile</h2>
+        <h2 className="text-lg font-medium text-foreground">Profile</h2>
         <ProfileEditor profile={profile} />
       </section>
 
       <section className="mt-10">
-        <h2 className="text-lg font-medium text-zinc-950 dark:text-zinc-50">Availability</h2>
+        <h2 className="text-lg font-medium text-foreground">Availability</h2>
         <div className="mt-3">
           <AvailabilityEditor availability={(availability as Availability[] | null) ?? []} />
         </div>
       </section>
 
       <section className="mt-10">
-        <h2 className="text-lg font-medium text-zinc-950 dark:text-zinc-50">History</h2>
+        <h2 className="text-lg font-medium text-foreground">History</h2>
         {history.length === 0 ? (
-          <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">No past sessions yet.</p>
+          <p className="mt-3 text-sm text-stone-600 dark:text-stone-400">No past sessions yet.</p>
         ) : (
           <ul className="mt-3 flex flex-col gap-3">
             {history.map((booking) => (
               <li
                 key={booking.id}
-                className="flex items-start justify-between gap-4 rounded-xl border border-black/[.08] bg-white p-4 dark:border-white/[.145] dark:bg-zinc-950"
+                className="flex items-start justify-between gap-4 rounded-2xl border border-stone-200 bg-background p-4 dark:border-stone-800"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="font-medium text-zinc-950 dark:text-zinc-50">{booking.subject}</p>
+                    <p className="font-medium text-foreground">{booking.subject}</p>
                     <StatusBadge status={booking.status} />
                   </div>
-                  <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
                     with {booking.student?.full_name ?? 'Unknown student'}
                   </p>
-                  <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
                     {formatRange(booking.start_at, booking.end_at)}
                   </p>
                 </div>

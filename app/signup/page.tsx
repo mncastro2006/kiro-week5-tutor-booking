@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { WarningCircleIcon } from '@phosphor-icons/react/ssr';
 import { signup } from './actions';
 
 export default async function SignupPage({
@@ -9,22 +10,23 @@ export default async function SignupPage({
   const { error } = await searchParams;
 
   return (
-    <div className="flex flex-1 items-center justify-center bg-zinc-50 px-4 py-16 dark:bg-black">
-      <div className="w-full max-w-sm rounded-xl border border-black/[.08] bg-white p-8 dark:border-white/[.145] dark:bg-zinc-950">
-        <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">Sign up</h1>
-        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+    <div className="flex flex-1 items-center justify-center bg-stone-100/60 px-4 py-16 dark:bg-stone-900/40">
+      <div className="w-full max-w-sm rounded-2xl border border-stone-200 bg-background p-8 shadow-sm dark:border-stone-800">
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">Sign up</h1>
+        <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
           Create an account to book or offer tutoring sessions.
         </p>
 
         {error && (
-          <p className="mt-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+          <p className="mt-4 flex items-start gap-2 rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
+            <WarningCircleIcon size={16} className="mt-0.5 shrink-0" />
             {error}
           </p>
         )}
 
         <form action={signup} className="mt-6 flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="full_name" className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label htmlFor="full_name" className="text-sm font-medium text-stone-800 dark:text-stone-200">
               Full name
             </label>
             <input
@@ -33,11 +35,11 @@ export default async function SignupPage({
               type="text"
               autoComplete="name"
               required
-              className="rounded-md border border-black/[.08] bg-transparent px-3 py-2 text-sm text-zinc-950 outline-none focus:border-zinc-950 dark:border-white/[.145] dark:text-zinc-50 dark:focus:border-zinc-50"
+              className="rounded-lg border border-stone-300 bg-transparent px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20 dark:border-stone-700"
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label htmlFor="email" className="text-sm font-medium text-stone-800 dark:text-stone-200">
               Email
             </label>
             <input
@@ -46,11 +48,11 @@ export default async function SignupPage({
               type="email"
               autoComplete="email"
               required
-              className="rounded-md border border-black/[.08] bg-transparent px-3 py-2 text-sm text-zinc-950 outline-none focus:border-zinc-950 dark:border-white/[.145] dark:text-zinc-50 dark:focus:border-zinc-50"
+              className="rounded-lg border border-stone-300 bg-transparent px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20 dark:border-stone-700"
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label htmlFor="password" className="text-sm font-medium text-stone-800 dark:text-stone-200">
               Password
             </label>
             <input
@@ -60,33 +62,33 @@ export default async function SignupPage({
               autoComplete="new-password"
               minLength={6}
               required
-              className="rounded-md border border-black/[.08] bg-transparent px-3 py-2 text-sm text-zinc-950 outline-none focus:border-zinc-950 dark:border-white/[.145] dark:text-zinc-50 dark:focus:border-zinc-50"
+              className="rounded-lg border border-stone-300 bg-transparent px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20 dark:border-stone-700"
             />
           </div>
-          <fieldset className="flex flex-col gap-1.5">
-            <legend className="text-sm font-medium text-zinc-900 dark:text-zinc-100">I am a...</legend>
-            <div className="flex gap-4">
-              <label className="flex items-center gap-2 text-sm text-zinc-800 dark:text-zinc-200">
-                <input type="radio" name="role" value="student" defaultChecked className="accent-zinc-950 dark:accent-zinc-50" />
+          <fieldset className="flex flex-col gap-2">
+            <legend className="text-sm font-medium text-stone-800 dark:text-stone-200">I am a...</legend>
+            <div className="grid grid-cols-2 gap-2">
+              <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-stone-300 py-2 text-sm text-stone-700 transition-colors has-[:checked]:border-accent has-[:checked]:bg-accent/10 has-[:checked]:text-accent-strong dark:border-stone-700 dark:text-stone-300">
+                <input type="radio" name="role" value="student" defaultChecked className="sr-only" />
                 Student
               </label>
-              <label className="flex items-center gap-2 text-sm text-zinc-800 dark:text-zinc-200">
-                <input type="radio" name="role" value="tutor" className="accent-zinc-950 dark:accent-zinc-50" />
+              <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-stone-300 py-2 text-sm text-stone-700 transition-colors has-[:checked]:border-accent has-[:checked]:bg-accent/10 has-[:checked]:text-accent-strong dark:border-stone-700 dark:text-stone-300">
+                <input type="radio" name="role" value="tutor" className="sr-only" />
                 Tutor
               </label>
             </div>
           </fieldset>
           <button
             type="submit"
-            className="mt-2 h-10 rounded-full bg-foreground text-sm font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+            className="mt-2 h-10 rounded-full bg-accent text-sm font-medium text-white transition-colors hover:bg-accent-strong"
           >
             Create account
           </button>
         </form>
 
-        <p className="mt-6 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-6 text-sm text-stone-600 dark:text-stone-400">
           Already have an account?{' '}
-          <Link href="/login" className="font-medium text-zinc-950 underline dark:text-zinc-50">
+          <Link href="/login" className="font-medium text-accent hover:text-accent-strong">
             Log in
           </Link>
         </p>

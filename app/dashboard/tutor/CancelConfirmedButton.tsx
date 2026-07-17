@@ -21,11 +21,11 @@ export default function CancelConfirmedButton({ bookingId }: { bookingId: string
         type="button"
         onClick={handleClick}
         disabled={isPending}
-        className="rounded-full border border-black/[.08] px-3 py-1 text-xs font-medium text-zinc-800 transition-colors hover:bg-black/[.04] disabled:opacity-60 dark:border-white/[.145] dark:text-zinc-200 dark:hover:bg-white/[.06]"
+        className="rounded-full border border-stone-300 px-3 py-1 text-xs font-medium text-stone-700 transition-colors hover:border-stone-400 hover:bg-stone-100 disabled:opacity-60 dark:border-stone-700 dark:text-stone-300 dark:hover:bg-stone-800"
       >
         {isPending ? 'Cancelling...' : 'Cancel'}
       </button>
-      {error && <p className="text-xs text-red-600 dark:text-red-400">{error}</p>}
+      {error && <p className="text-xs text-rose-600 dark:text-rose-400">{error}</p>}
     </div>
   );
 }

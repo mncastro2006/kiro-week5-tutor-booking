@@ -22,7 +22,7 @@ export default function BookingRequestActions({ bookingId }: { bookingId: string
           type="button"
           disabled={isPending}
           onClick={() => handle(acceptBooking)}
-          className="rounded-full bg-foreground px-3 py-1 text-xs font-medium text-background transition-colors hover:bg-[#383838] disabled:opacity-60 dark:hover:bg-[#ccc]"
+          className="rounded-full bg-accent px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-accent-strong disabled:opacity-60"
         >
           Accept
         </button>
@@ -30,12 +30,12 @@ export default function BookingRequestActions({ bookingId }: { bookingId: string
           type="button"
           disabled={isPending}
           onClick={() => handle(rejectBooking)}
-          className="rounded-full border border-black/[.08] px-3 py-1 text-xs font-medium text-zinc-800 transition-colors hover:bg-black/[.04] disabled:opacity-60 dark:border-white/[.145] dark:text-zinc-200 dark:hover:bg-white/[.06]"
+          className="rounded-full border border-stone-300 px-3 py-1 text-xs font-medium text-stone-700 transition-colors hover:border-stone-400 hover:bg-stone-100 disabled:opacity-60 dark:border-stone-700 dark:text-stone-300 dark:hover:bg-stone-800"
         >
           Reject
         </button>
       </div>
-      {error && <p className="max-w-[16rem] text-right text-xs text-red-600 dark:text-red-400">{error}</p>}
+      {error && <p className="max-w-[16rem] text-right text-xs text-rose-600 dark:text-rose-400">{error}</p>}
     </div>
   );
 }

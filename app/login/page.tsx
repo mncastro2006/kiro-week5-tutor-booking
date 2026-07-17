@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { WarningCircleIcon } from '@phosphor-icons/react/ssr';
 import { login } from './actions';
 
 export default async function LoginPage({
@@ -9,22 +10,23 @@ export default async function LoginPage({
   const { error } = await searchParams;
 
   return (
-    <div className="flex flex-1 items-center justify-center bg-zinc-50 px-4 py-16 dark:bg-black">
-      <div className="w-full max-w-sm rounded-xl border border-black/[.08] bg-white p-8 dark:border-white/[.145] dark:bg-zinc-950">
-        <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">Log in</h1>
-        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+    <div className="flex flex-1 items-center justify-center bg-stone-100/60 px-4 py-16 dark:bg-stone-900/40">
+      <div className="w-full max-w-sm rounded-2xl border border-stone-200 bg-background p-8 shadow-sm dark:border-stone-800">
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">Log in</h1>
+        <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
           Welcome back. Enter your details to continue.
         </p>
 
         {error && (
-          <p className="mt-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+          <p className="mt-4 flex items-start gap-2 rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
+            <WarningCircleIcon size={16} className="mt-0.5 shrink-0" />
             {error}
           </p>
         )}
 
         <form action={login} className="mt-6 flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label htmlFor="email" className="text-sm font-medium text-stone-800 dark:text-stone-200">
               Email
             </label>
             <input
@@ -33,11 +35,11 @@ export default async function LoginPage({
               type="email"
               autoComplete="email"
               required
-              className="rounded-md border border-black/[.08] bg-transparent px-3 py-2 text-sm text-zinc-950 outline-none focus:border-zinc-950 dark:border-white/[.145] dark:text-zinc-50 dark:focus:border-zinc-50"
+              className="rounded-lg border border-stone-300 bg-transparent px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20 dark:border-stone-700"
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label htmlFor="password" className="text-sm font-medium text-stone-800 dark:text-stone-200">
               Password
             </label>
             <input
@@ -46,20 +48,20 @@ export default async function LoginPage({
               type="password"
               autoComplete="current-password"
               required
-              className="rounded-md border border-black/[.08] bg-transparent px-3 py-2 text-sm text-zinc-950 outline-none focus:border-zinc-950 dark:border-white/[.145] dark:text-zinc-50 dark:focus:border-zinc-50"
+              className="rounded-lg border border-stone-300 bg-transparent px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20 dark:border-stone-700"
             />
           </div>
           <button
             type="submit"
-            className="mt-2 h-10 rounded-full bg-foreground text-sm font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+            className="mt-2 h-10 rounded-full bg-accent text-sm font-medium text-white transition-colors hover:bg-accent-strong"
           >
             Log in
           </button>
         </form>
 
-        <p className="mt-6 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-6 text-sm text-stone-600 dark:text-stone-400">
           Don&apos;t have an account?{' '}
-          <Link href="/signup" className="font-medium text-zinc-950 underline dark:text-zinc-50">
+          <Link href="/signup" className="font-medium text-accent hover:text-accent-strong">
             Sign up
           </Link>
         </p>
